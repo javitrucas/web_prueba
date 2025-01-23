@@ -3,77 +3,232 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feliz Navidad, Meriis</title>
+    <title>Registro de Datos de Salud y Ejercicio</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fef5e7;
-            color: #4b3832;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            color: #d72631;
-            margin-bottom: 20px;
-        }
-        .gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            margin: 20px 0;
-        }
-        .gallery-item {
-            background: #fff;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-        }
-        .description {
-            padding: 10px;
-            font-size: 16px;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
             color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
         }
-        footer {
-            margin-top: 30px;
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        input[type="date"], input[type="number"] {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
             font-size: 14px;
-            color: #888;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .response {
+            margin-top: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .response.success {
+            color: green;
+        }
+
+        .response.error {
+            color: red;
+        }
+
+        .form-group {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .form-group label {
+            flex: 1;
+            font-size: 14px;
+            color: #7f8c8d;
+        }
+
+        .form-group input {
+            flex: 2;
+        }
+
+        .charts-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        iframe {
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
-    <h1>¡Feliz Navidad, Meriis! 🎄❤️</h1>
-    <p>Espero que disfrutes este pequeño detalle lleno de buenos recuerdos.</p>
+    <div class="container">
+        <h1>Registro de Datos de Salud y Ejercicio</h1>
 
-    <div class="gallery">
-        <!-- Foto 1 -->
-        <div class="gallery-item">
-            <img src="foto1.jpg" alt="Foto 1">
-            <div class="description">Escribe aquí la descripción de la foto 1.</div>
+        <!-- Formulario de Peso -->
+        <form id="weightForm">
+            <h2>Registrar Peso</h2>
+            <div class="form-group">
+                <label for="weightDate">Fecha:</label>
+                <input type="date" id="weightDate" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="weightValue">Peso (kg):</label>
+                <input type="number" id="weightValue" name="weight" required>
+            </div>
+            <button type="submit">Guardar Peso</button>
+        </form>
+
+        <div id="weightResponse" class="response"></div>
+
+        <!-- Formulario de Ejercicio -->
+        <form id="runForm">
+            <h2>Registrar Ejercicio</h2>
+            <div class="form-group">
+                <label for="runDate">Fecha:</label>
+                <input type="date" id="runDate" name="date" required>
+            </div>
+            <div class="form-group">
+                <label for="distance">Distancia (km):</label>
+                <input type="number" id="distance" name="distance" required>
+            </div>
+            <div class="form-group">
+                <label for="time">Tiempo (minutos):</label>
+                <input type="number" id="time" name="time" required>
+            </div>
+            <button type="submit">Guardar Ejercicio</button>
+        </form>
+
+        <div id="runResponse" class="response"></div>
+
+        <!-- Contenedor para los gráficos -->
+        <div class="charts-container">
+            <!-- Gráfico de Peso -->
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQbHCIcE2j8BLxtlXiX2_gNHe1IZf97Lw0DDn1w1v7-0LsytFKUlHJZtMh8KEyPXyFN66W3qFCiAUUp/pubchart?oid=415722604&format=interactive" width="400" height="300"></iframe>
+
+            <!-- Gráfico de Ejercicio -->
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQbHCIcE2j8BLxtlXiX2_gNHe1IZf97Lw0DDn1w1v7-0LsytFKUlHJZtMh8KEyPXyFN66W3qFCiAUUp/pubchart?oid=1302668801&format=interactive" width="400" height="300"></iframe>
         </div>
-
-        <!-- Foto 2 -->
-        <div class="gallery-item">
-            <img src="foto2.jpg" alt="Foto 2">
-            <div class="description">Escribe aquí la descripción de la foto 2.</div>
-        </div>
-
-        <!-- Foto 3 -->
-        <div class="gallery-item">
-            <img src="foto3.jpg" alt="Foto 3">
-            <div class="description">Escribe aquí la descripción de la foto 3.</div>
-        </div>
-
-        <!-- Puedes añadir más fotos aquí -->
     </div>
 
-    <footer>
-        Con mucho cariño, Javi. 💖
-    </footer>
+    <script>
+        // Enviar datos de peso a Google Sheets
+        const weightForm = document.getElementById('weightForm');
+        const weightResponse = document.getElementById('weightResponse');
+
+        weightForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(weightForm);
+            const data = {
+                date: formData.get('date'),
+                weight: formData.get('weight')
+            };
+
+            try {
+                const response = await fetch('https://script.google.com/macros/s/AKfycbzjnf5rQ5dyIGIEjcTdLEIZGYDW6N5ZFgLCGMwlnE07HUblgeMzWblL19COUaz2pVbQ/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    weightResponse.textContent = 'Peso guardado con éxito.';
+                    weightResponse.className = 'response success';
+                } else {
+                    weightResponse.textContent = result.message || 'Error al guardar el peso.';
+                    weightResponse.className = 'response error';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                weightResponse.textContent = 'No se pudo enviar la información.';
+                weightResponse.className = 'response error';
+            }
+        });
+
+        // Enviar datos de ejercicio a Google Sheets
+        const runForm = document.getElementById('runForm');
+        const runResponse = document.getElementById('runResponse');
+
+        runForm.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(runForm);
+            const data = {
+                date: formData.get('date'),
+                distance: formData.get('distance'),
+                time: formData.get('time')
+            };
+
+            try {
+                const response = await fetch('https://script.google.com/macros/s/AKfycbzjnf5rQ5dyIGIEjcTdLEIZGYDW6N5ZFgLCGMwlnE07HUblgeMzWblL19COUaz2pVbQ/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                const result = await response.json();
+                if (result.success) {
+                    runResponse.textContent = 'Ejercicio guardado con éxito.';
+                    runResponse.className = 'response success';
+                } else {
+                    runResponse.textContent = result.message || 'Error al guardar el ejercicio.';
+                    runResponse.className = 'response error';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                runResponse.textContent = 'No se pudo enviar la información.';
+                runResponse.className = 'response error';
+            }
+        });
+    </script>
 </body>
 </html>
